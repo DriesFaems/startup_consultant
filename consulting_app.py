@@ -57,12 +57,14 @@ if st.button("Get Expert Advice"):
         handoffs=[technical_expert, legal_expert, commercial_expert, hr_expert]
     )
 
-    triage_result = Runner.run(triage_agent, question)
-
-    response = triage_result.final_output
+    async def main():
+        triage_result = Runner.run(triage_agent, question)
+        response = triage_result.final_output
+        st.expander(f"Response")
+        st.write(response)
     
-    st.expander(f"Response")
-    st.write(response)
+    if __name__ == "__main__":
+        asyncio.run(main())
 
 else:
     st.write("Please enter your OpenAI API Key and question to get expert advice.")
